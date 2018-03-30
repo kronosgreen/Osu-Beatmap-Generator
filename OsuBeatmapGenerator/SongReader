@@ -1,0 +1,31 @@
+#
+#   Osu Beatmap Generator Project
+#
+#       by Christopher Medrano
+#
+#   Song Reader
+#
+#   Info: This file is meant to create instances of songs as data related to the frequency being played
+#           over time (measured in ms as osu files are read that way). This is so that the deep learning algorithm
+#           can read the songs simultaneously with the map info
+#
+#
+
+import numpy as np
+from matplotlib import*
+from scipy.io import wavfile
+
+
+class Song:
+    def __init__(self, songFile):
+        sampFreq, snd = wavfile.read(songFile)
+        snd = snd/(2.**15)
+
+        print("SAMP FREQUENCY : " + str(sampFreq))
+        songFft = np.fft.fft(snd)
+
+        #for value in songFft:
+        #    print(str(value) + "\n")
+
+
+x = Song("rm.wav")
